@@ -1,6 +1,7 @@
 function ToSomaBuffer(text)
   let name = substitute(system("whoami"), "\n", "", "") 
-  call writefile(split(a:text, '\n'), "/tmp/". name . "_somarepl_buffer")
+  let tmpdir = system("echo -n $TMPDIR")
+  call writefile(split(a:text, '\n'), tmpdir . "/". name . "_somarepl_buffer")
 endfunction
   
 vmap <C-c><C-c> "ry :call ToSomaBuffer(@r)<CR>
