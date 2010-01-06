@@ -1,18 +1,14 @@
 = Soma
 A shot at implementing a REPL-like feature for vim (and everything else able to write to text files). 
 
+== Install It!
+  sudo gem install --no-wrappers soma
+
 == Use It!
-Add the following to your <tt>~/.irbrc</tt>:
+  vimirb
 
-  require 'soma'
-  Soma.start
-
-When you start IRB Soma will listen on a file named <tt>/tmp/username_somarepl_buffer</tt> and execute everything added there in your IRB session.
-
-(And for the sake of God, use Wirble for a prettier IRB!)
+When you start IRB Soma will listen on a file named <tt>$TMPDIR/$USER_somarepl_buffer</tt> and execute everything added there in your IRB session.
 
 == Vim plugin
 Copy <tt>plugins/soma.vim</tt> to <tt>~/.vim/plugin/</tt>. The default mapping is <tt>Ctrl-c Ctrl-c</tt>, which sends the current paragraph or visual selection to IRB.
 
-== Quirks & Annoyances
-* Commands are added to IRB history, but you have to go one item back in your history or invoke some command before it's updated.

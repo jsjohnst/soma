@@ -1,0 +1,35 @@
+#!/usr/bin/env ruby
+require "irb"
+
+IRB.conf[:USE_READLINE] = false
+
+
+module IRB
+  class << self
+    alias :irb_run_config_orig :run_config
+  end
+
+  def IRB.run_config
+    irb_run_config_orig
+
+    begin
+      require 'soma'
+
+      Soma.start
+    rescue LoadError => err
+      warn "Couldn't load Soma: #{err}"
+    end
+  end
+
+end
+
+if __FILE__ == $0
+  IRB.start(__FILE__)
+else
+  # check -e option
+  if /^-e$/ =~ $0
+    IRB.start(__FILE__)
+  else
+    IRB.setup(__FILE__)
+  end
+end
