@@ -20,8 +20,10 @@ module Soma
     erase_and_open_buffer
     loop do
       while (line = @file.readlines) && !line.empty?
-        line.each {|l| Readline::HISTORY.push(l.strip) }
+        # Readline is funky for some reason, so we won't use it
+#        line.each {|l| Readline::HISTORY.push(l.strip) }
         # Get the current IRB
+        puts ""
         irb = IRB.CurrentContext.irb
         # We save the IRB context that takes STDIN as input
         stdin_context = irb.context
